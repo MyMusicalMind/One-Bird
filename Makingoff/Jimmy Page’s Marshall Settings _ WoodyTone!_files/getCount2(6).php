@@ -1,0 +1,1 @@
+(function(){stButtons.processCB({"google":53,"clicks_total":88,"facebook":24,"twitter":16,"email":16,"mongo":4,"total":109,"shares":{"facebook":17,"all":17,"mongo":4},"url":"http:\/\/www.woodytone.com\/2012\/04\/20\/did-you-read-the-esquire-evh-piece-yet\/","ourl":"http:\/\/www.woodytone.com\/2012\/04\/20\/did-you-read-the-esquire-evh-piece-yet\/#sthash.gldPco6C"})})();

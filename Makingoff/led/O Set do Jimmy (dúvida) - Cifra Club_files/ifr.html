@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0073)http://userdmp.com/dmp/ifr?s=28f5d9c1|17930394|&ie=false&ssl=false&f=true -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>
+<object width="0" height="0" type="application/x-shockwave-flash" data="http://userdmp.com/dmp.swf" id="dmpswf">
+	<param name="allowScriptAccess" value="always">
+</object>
+<script>
+function _indexOf(o, l, fi){
+	if(o && l && o.length){
+		if(o instanceof Array){
+			for(var i = (fi || 0); i < o.length; i++){
+				if(l == o[i]){
+					return i;
+				}
+			}
+		}else if(typeof(o) == "string"){
+			for(var i = (fi || 0); i < o.length; i++){
+				if(o.substring(i, l.length + i) == l){
+					return i;
+				}
+			}
+		}
+	}
+	return -1;
+}
+var params = window.location.href.substring(_indexOf(window.location.href + "", '=') + 1).split('|');
+var url = document.referrer;
+var suf = '#' + params[0] + '#' + params[1] + '|';
+function receiveMessageFrame(event) {
+	call(event.data);
+}
+
+function call(d){
+	try{
+		var ind = _indexOf(d, suf);
+		if(ind > 0){
+			var fn;
+			eval('fn=' + d.substring(0, ind));
+			if (_indexOf(d, 'set') == 0) {
+				var i = _indexOf(d, '=');
+				var nameValue = d.substring(i + 1).split(/\|/);
+				fn(nameValue[0], nameValue[1], sendback('dmpresp' + suf + d.substring(0, i + 1)));
+			}else if (_indexOf(d ,'get') == 0) {
+				var i = _indexOf(d, '=');
+				var name = d.substring(i + 1);
+				var v = fn(name, sendback('dmpresp' + suf + d.substring(0, i + 1)));
+			}
+		}
+	}catch(e){}
+}
+
+function sendback(val){
+	return {
+		send: function(result){
+			window.parent.postMessage(val + (result || ''), url);
+		}
+	}
+}
+
+function set(name, value, sb){
+	if(name == 'uv'){
+		document.cookie = 'uv=;expires=Thu, 01 Jan 1970 00:00:00 UTC';
+	}
+	var dt = new Date();
+	value = value.split(':');
+	if(value.length > 1){
+		dt.setTime(dt.getTime() + parseInt(value[1]));
+	}else{
+		dt.setFullYear(dt.getFullYear() + 2);	
+	}
+	value = value[0];
+	document.cookie = name + '=' + value + ';path=/; expires=' + dt.toGMTString() + ';domain=.userdmp.com';
+	sb.send();
+}
+
+function get(name, sb){
+	var parts = document.cookie.split(';');
+	var result;
+	for(var i in parts){
+		if(parts[i].replace){
+			var _c = parts[i].replace(/^\s+|\s+$/g, '');
+			if(_indexOf(_c, name + '=') == 0 && _c.substring(name.length + 1) != ''){
+				result = _c.substring(name.length + 1);
+				break;
+			}	
+		}
+	}
+	sb.send(result);
+}
+function getStorageStatus(name, sb){
+	if (typeof (localStorage) != 'undefined') {
+		try{
+			localStorage[name] = 'testingstorage';
+			localStorage[name] = null;
+			sb.send('ok');
+		}catch(e){
+		}
+	}
+	sb.send('nok');
+}
+function prepareResult(val){
+	return val ? val.replace(/^\s+|\s+$/g, '') != '' : ''
+}
+function getHtml5(n, sb){
+	var result = localStorage[n];
+	sb.send(result);
+}
+function setHtml5(n, v, sb){
+	localStorage[n] = v;		
+	sb.send();
+}
+
+
+if (window.addEventListener) { // W3C standard
+	window.addEventListener('message', receiveMessageFrame, false); // NB
+} else if (window.attachEvent) { // Microsoft
+	window.attachEvent('onmessage', receiveMessageFrame);
+}
+sendback('dmpresp' + suf + 'ready=null').send();
+
+//flash
+var _flInit = false;
+var _flerror = false;
+var _flci = setTimeout(function(){
+	if(!_flInit){
+		_flerror = true;
+		sendback('dmpresp' + suf + "ex=u_til.listen('errorLoadingFlash');u_til.listen('getCookie', {name:'flash', found: false});").send();
+		_flInit = true;
+		_startFlash();
+	}
+}, 10000);
+
+_callbacks = [];
+function _startFlash(){
+	var c = _callbacks;
+	_callbacks = null;
+	for(var i = 0; i < c.length; i++){
+		var sb = c[i].sb;
+		if(c[i].get){
+			getFlash(null, sb);
+		}else{
+			setFlash(null, c[i].val, sb);
+		}
+	}
+}
+var _fakeFlash = null;
+function getFlash(n, sb){
+	if(!_flInit){
+		_callbacks.push({sb:sb, get: true});
+	}else{
+		var v = _fakeFlash;
+		try{
+			v = document.getElementById("dmpswf").getFlashCookie();
+		}catch(e){
+		}
+		sb.send(v);
+	}
+}
+function setFlash(n, val, sb){
+	if(!_flInit){
+		_callbacks.push({sb:sb, val: val});
+	}else{
+		try{
+			document.getElementById("dmpswf").createFlashCookie(val);
+		}catch(e){
+			_fakeFlash = val;
+		}
+		sb.send();
+	}
+}
+_uVisitFunctions = {
+	addFlashCookie: function(){
+		if(!_flInit){
+			clearTimeout(_flci);
+			_flInit = true;
+			_startFlash();
+		}
+	}
+};
+</script>
+</body></html>

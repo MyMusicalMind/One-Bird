@@ -1,0 +1,1 @@
+(function(){stButtons.processCB({"yahoo":5,"google":221,"clicks_total":260,"facebook":28,"twitter":7,"email":4,"mongo":2,"total":263,"shares":{"all":1,"mongo":2,"twitter":1},"url":"http:\/\/www.woodytone.com\/2012\/06\/05\/more-on-the-ymi5150-model-a-guitar\/","ourl":"http:\/\/www.woodytone.com\/2012\/06\/05\/more-on-the-ymi5150-model-a-guitar\/#sthash.gldPco6C"})})();
