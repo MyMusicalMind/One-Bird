@@ -18,9 +18,9 @@ Ferramentas: Photoshop PS5, Illustrator AI5, GUitar Pro 6, FLSTUDIO 12, Guitar R
 <img src="https://image.ibb.co/dkJeeQ/front.jpg" width="300" height="300">
 <br><br>
 <p>Faixas: </p>
-<p>1. Birds</p>
-<p>2. Men in Black Beside at the House</p>
-<p>3. Thelema</p>
-<p>4. Italian Coffee for Two, Please</p>
-<p>5. The old man, Mr. Frank Thompson</p>
+<p>1. Birds | a href="https://www.youtube.com/watch?v=sshZODCfM7E&index=22&list=UUkaEQ4S6wiK-lWtjFEWEeCg">no youtube</a></p>
+<p>2. Men in Black Beside at the House | a href="https://www.youtube.com/watch?v=-aQqZ8_GEk0&index=20&list=UUkaEQ4S6wiK-lWtjFEWEeCg">no youtube</a></p>
+<p>3. Thelema | < a href="https://www.youtube.com/watch?v=kiGUXsDnEXg&index=21&list=UUkaEQ4S6wiK-lWtjFEWEeCg">no youtube</a></p>
+<p>4. Italian Coffee for Two, Please | <a href="https://www.youtube.com/watch?v=7pMUYQYAd0k&index=19&list=UUkaEQ4S6wiK-lWtjFEWEeCg">no youtube</a></p>
+<p>5. The old man, Mr. Frank Thompson | a href="https://www.youtube.com/watch?v=31LgFrZL3Yc&index=18&list=UUkaEQ4S6wiK-lWtjFEWEeCg">no youtube</a></p>
 
